@@ -150,7 +150,7 @@ server {
 
 #### SSL Library Doc :
 
-[!ssl_certbot]("https://certbot.eff.org/instructions?ws=nginx&os=ubuntufocal")
+[!ssl_certbot](https://certbot.eff.org/instructions?ws=nginx&os=ubuntufocal)
 
 ### Domain Host :
 
