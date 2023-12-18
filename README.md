@@ -155,3 +155,13 @@ server {
 ### Domain Host :
 
 `CloudFlare`
+
+### Command
+
+**Running daemon**
+
+```
+systemctl daemon-reload
+systemctl restart app.service
+systemctl status app.service
+```
