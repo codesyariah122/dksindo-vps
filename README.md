@@ -61,6 +61,37 @@ WantedBy=multi-user.target
 
 ```
 
+#### Api service vhost :
+
+**on /etc/nginx/sites-available/sirmuh-api**
+
+```
+server {
+  server_name sirmuh.api.****.***;
+
+  location / {
+    proxy_pass http://103.175.221.221:9001;
+  }
+
+    listen 443 ssl; # managed by Certbot
+    ssl_certificate /etc/letsencrypt/live/****.***/fullchain.pem; # managed by Certbot
+    ssl_certificate_key /etc/letsencrypt/live/****.***/privkey.pem; # managed by Certbot
+    include /etc/letsencrypt/options-ssl-nginx.conf; # managed by Certbot
+    ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem; # managed by Certbot
+
+}
+server {
+    if ($host = sirmuh.***.****.***) {
+        return 301 https://$host$request_uri;
+    } # managed by Certbot
+
+
+  listen 80;
+  server_name sirmuh.***.****.***;
+    return 404; # managed by Certbot
+}
+```
+
 ### NuxtJS as Ui System Background
 
 **on /etc/systemd/system/sirmuh.ui.service**
@@ -77,6 +108,43 @@ Restart=always
 
 [Install]
 WantedBy=multi-user.target
+
+```
+
+#### Nuxtjs AS ui vhost :
+
+**on /etc/nginx/sites-available**
+
+```
+server {
+  server_name sirmuh.****.***;
+
+  location / {
+    proxy_pass http://localhost:3001;
+    proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection 'upgrade';
+        proxy_set_header Host $host;
+        proxy_cache_bypass $http_upgrade;
+  }
+
+    listen 443 ssl; # managed by Certbot
+    ssl_certificate /etc/letsencrypt/live/****.***/fullchain.pem; # managed by Certbot
+    ssl_certificate_key /etc/letsencrypt/live/****.***/privkey.pem; # managed by Certbot
+    include /etc/letsencrypt/options-ssl-nginx.conf; # managed by Certbot
+    ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem; # managed by Certbot
+
+}
+server {
+    if ($host = sirmuh.****.***) {
+        return 301 https://$host$request_uri;
+    } # managed by Certbot
+
+
+  listen 80;
+  server_name sirmuh.****.***;
+    return 404; # managed by Certbot
+}
 
 ```
 
