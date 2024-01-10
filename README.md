@@ -267,7 +267,7 @@ yarn install pm2 -D
 
 ```
 
-vi /etc/nginx/sites-availabel/default
+vi /etc/nginx/sites-available/default
 
 ```
 
@@ -312,9 +312,5 @@ pm2 list
 id │ name │ mode │ ↺ │ status │ cpu │ memory │
 ├────┼────────────────────┼──────────┼──────┼───────────┼──────────┼──────────┤
 │ 0 │ sirmuh-pos-ui │ fork │ 0 │ online │ 0% │ 80.4mb │
-
-```
-
-```
 
 ```
