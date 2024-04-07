@@ -314,3 +314,18 @@ id │ name │ mode │ ↺ │ status │ cpu │ memory │
 │ 0 │ sirmuh-pos-ui │ fork │ 0 │ online │ 0% │ 80.4mb │
 
 ```
+
+### Phpmyadmin In Default 
+```bash
+location /phpmyadmin {
+        alias /usr/share/phpmyadmin;
+        index index.php;
+
+        location ~ \.php$ {
+            include snippets/fastcgi-php.conf;
+            fastcgi_pass unix:/run/php/php8.2-fpm.sock;
+            fastcgi_param SCRIPT_FILENAME $request_filename;
+            include fastcgi_params;
+        }
+}
+```
