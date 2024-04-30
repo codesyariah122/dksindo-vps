@@ -97,14 +97,14 @@ server {
     client_max_body_size 100M;
     listen 80;
     server_name localhost;
-    # server_name 103.175.221.221:9022;
+    # server_name ip-addr:port;
     root /var/www/html/sirmuh-pos-api-backend/public;
 
     index index.php index.html index.htm;
 
     location / {
         try_files $uri $uri/ /index.php?$query_string;
-        # proxy_pass http://103.175.221.221:9022;
+        # proxy_pass http://ip-addr:port;
     }
 
 location /phpmyadmin {
@@ -269,7 +269,7 @@ server {
   server_name your-app.com;
 
   location / {
-    proxy_pass http://your-ip-public:9091;
+    proxy_pass http://your-ip-public:port;
     proxy_http_version 1.1;
         proxy_set_header Upgrade $http_upgrade;
         proxy_set_header Connection 'upgrade';
