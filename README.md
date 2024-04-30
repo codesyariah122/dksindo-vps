@@ -61,16 +61,16 @@ WantedBy=multi-user.target
 
 ```
 
-#### Api service vhost :
+#### Api service vhost on host :
 
 **on /etc/nginx/sites-available/sirmuh-api**
 
 ```
 server {
-  server_name sirmuh.api.****.***;
+  server_name sirmuh.subdomain.****.***;
 
   location / {
-    proxy_pass http://103.175.221.221:9001;
+    proxy_pass http://ip-addr:port;
   }
 
     listen 443 ssl; # managed by Certbot
@@ -89,6 +89,49 @@ server {
   listen 80;
   server_name sirmuh.***.****.***;
     return 404; # managed by Certbot
+}
+```
+### vhost on container docker  
+```
+server {
+    client_max_body_size 100M;
+    listen 80;
+    server_name localhost;
+    # server_name 103.175.221.221:9022;
+    root /var/www/html/sirmuh-pos-api-backend/public;
+
+    index index.php index.html index.htm;
+
+    location / {
+        try_files $uri $uri/ /index.php?$query_string;
+        # proxy_pass http://103.175.221.221:9022;
+    }
+
+location /phpmyadmin {
+    alias /var/www/html/phpmyadmin;
+    index index.php;
+
+location ~ \.php$ {
+            include snippets/fastcgi-php.conf;
+            fastcgi_pass unix:/run/php/php8.2-fpm.sock;
+            fastcgi_param SCRIPT_FILENAME $request_filename;
+            include fastcgi_params;
+        }
+}
+    location ~ \.php$ {
+        include snippets/fastcgi-php.conf;
+        fastcgi_pass unix:/var/run/php/php8.2-fpm.sock;
+        fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+        include fastcgi_params;
+    }
+
+    location ~ /\.ht {
+        deny all;
+    }
+    
+
+    error_log  /var/log/nginx/error.log;
+    access_log /var/log/access.log;
 }
 ```
 
@@ -155,6 +198,9 @@ server {
 ### Domain Host :
 
 `CloudFlare`
+
+### DNS Checker :  
+[!dns_checker]([https://certbot.eff.org/instructions?ws=nginx&os=ubuntufocal](https://www.whatsmydns.net/ ))
 
 ### Command
 
