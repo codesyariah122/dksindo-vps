@@ -1,5 +1,6 @@
 # dksindo-vps
 ![dksindo-vps](https://github.com/codesyariah122/dksindo-vps/assets/13291805/d34d3a05-e332-414f-8dcc-3ac510070681)
+![Screenshot 2024-10-05 103828](https://github.com/user-attachments/assets/a61d25b6-eaee-4653-bdd2-fe2732ce8f2f)
 
 ### Database vhost
 
